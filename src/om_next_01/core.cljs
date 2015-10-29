@@ -32,7 +32,7 @@
 (defui UIView
        static om/IQuery
        (query [this]
-              [:get/description])
+              [:get/description]) ;; IQuery must return a vector (or map of vectors that representing union)
        Object
        (render [this]
                (let [{:keys [:get/description]} (om/props this)]
