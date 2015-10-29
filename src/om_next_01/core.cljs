@@ -32,33 +32,34 @@
 (defui UIView
        static om/IQuery
        (query [this]
-              [:get/description]) ;; IQuery must return a vector (or map of vectors when representing a union)
-       Object ;; methods declared below Object are associated with the JS Object
+              [:get/description])                           ;; IQuery must return a vector (or map of vectors when representing a union)
+       Object                                               ;; methods declared below Object are associated with the JS Object
        (render [this]
                (let [{:keys [:get/description]} (om/props this)]
                  (dom/div nil
-                   (dom/label nil "Description")
-                   (dom/input
-                     #js {:className "om-description"
-                          :value     description
-                          :onChange  (fn [e]
-                                       (om/transact! this
-                                                     `[(edit/description {:description (.. e -target -value)})]))})))))
+                          (dom/label nil "Description")
+                          (dom/input
+                            #js {:className "om-description"
+                                 :value     description
+                                 :onChange  (fn [e]
+                                              (let [value (.. e -target -value)]
+                                              (om/transact! this
+                                                            `[(edit/description {:description ~value})])))})
+                          (dom/label nil (str "There are " (.-length description) " characters."))))))
 
 (defmulti reading om/dispatch)
 
 (defmethod reading :get/description
   [{:keys [state]} key params]
-  {:value (:app/description @state key)})
+  {:value (:app/description @state)})
 
 (defmulti mutating om/dispatch)
 
 (defmethod mutating 'edit/description
   [{:keys [state]} _ {:keys [description]}]
-  {:value  [:app/description]
+  {:value  [:get/description]
    :action (fn []
-             (swap! state update-in
-                    [:app/description] description))})
+             (swap! state assoc :app/description description))})
 
 (defonce app-reconciler
          (om/reconciler
