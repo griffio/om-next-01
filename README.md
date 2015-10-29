@@ -2,7 +2,7 @@
 
 Simple Text Input with [om-next](https://github.com/omcljs/om/wiki/Quick-Start-%28om.next%29)
   
-1.0.0-alpha11 
+1.0.0-alpha12
 
 ## Overview
 
