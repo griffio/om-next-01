@@ -37,9 +37,9 @@
        (render [this]
                (let [{:keys [:get/description]} (om/props this)]
                  (dom/input
-                   #js {:className (str "om-" description)
-                        :value description
-                        :onChange  (fn [_]
+                   #js {:className "om-description"
+                        :value     description
+                        :onChange  (fn [e]
                                      (om/transact! this
                                                    `[(edit/description {:description (.. e -target -value)})]))}))))
 
@@ -58,10 +58,10 @@
              (swap! state update-in
                     [:app/description] description))})
 
-(def app-reconciler
-  (om/reconciler
-    {:state  app-state
-     :parser (om/parser {:read reading :mutate mutating})}))
+(defonce app-reconciler
+         (om/reconciler
+           {:state  app-state
+            :parser (om/parser {:read reading :mutate mutating})}))
 
 (om/add-root! app-reconciler
               UIView (gdom/getElement "ui"))
