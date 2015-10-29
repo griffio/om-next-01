@@ -32,8 +32,8 @@
 (defui UIView
        static om/IQuery
        (query [this]
-              [:get/description]) ;; IQuery must return a vector (or map of vectors that representing union)
-       Object
+              [:get/description]) ;; IQuery must return a vector (or map of vectors when representing a union)
+       Object ;; methods declared below Object are associated with the JS Object
        (render [this]
                (let [{:keys [:get/description]} (om/props this)]
                  (dom/div nil
