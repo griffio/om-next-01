@@ -57,7 +57,7 @@
 
 (defmethod mutating 'edit/description
   [{:keys [state]} _ {:keys [description]}]
-  ;; This optional query expression helps clients identify stale keys which should be re-read after mutation.
+  ;; :value is an optional query expression to help document stale keys that should be re-read after mutation for the client to action
   {:value [:get/description]}
   {:action (fn [] (swap! state assoc :app/description description))})
 
