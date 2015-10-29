@@ -30,10 +30,10 @@
 (defonce app-state (atom {:app/description "Description"}))
 
 (defui UIView
-       static om/IQuery
+       static om/IQuery ;; IQuery must return a vector (or map of vectors when representing a union)
        (query [this]
-              [:get/description])                           ;; IQuery must return a vector (or map of vectors when representing a union)
-       Object                                               ;; methods declared below Object are associated with the JS Object
+              [:get/description])
+       Object ;; methods declared below Object are associated with the JS Object
        (render [this]
                (let [{:keys [:get/description]} (om/props this)]
                  (dom/div nil
@@ -57,9 +57,9 @@
 
 (defmethod mutating 'edit/description
   [{:keys [state]} _ {:keys [description]}]
-  {:value  [:get/description]
-   :action (fn []
-             (swap! state assoc :app/description description))})
+  ;; This optional query expression helps clients identify stale keys which should be re-read after mutation.
+  {:value [:get/description]}
+  {:action (fn [] (swap! state assoc :app/description description))})
 
 (defonce app-reconciler
          (om/reconciler
