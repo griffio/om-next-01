@@ -36,12 +36,14 @@
        Object
        (render [this]
                (let [{:keys [:get/description]} (om/props this)]
-                 (dom/input
-                   #js {:className "om-description"
-                        :value     description
-                        :onChange  (fn [e]
-                                     (om/transact! this
-                                                   `[(edit/description {:description (.. e -target -value)})]))}))))
+                 (dom/div nil
+                   (dom/label nil "Description")
+                   (dom/input
+                     #js {:className "om-description"
+                          :value     description
+                          :onChange  (fn [e]
+                                       (om/transact! this
+                                                     `[(edit/description {:description (.. e -target -value)})]))})))))
 
 (defmulti reading om/dispatch)
 
