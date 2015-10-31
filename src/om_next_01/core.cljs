@@ -30,10 +30,10 @@
 (defonce app-state (atom {:app/description "Description"}))
 
 (defui UIView
-       static om/IQuery ;; IQuery must return a vector (or map of vectors when representing a union)
+       static om/IQuery                                     ;; IQuery must return a vector (or map of vectors when representing a union)
        (query [this]
-              [:get/description])
-       Object ;; methods declared below Object are associated with the JS Object
+              [:get/description])                           ;; one or more keywords can be fetched by the query reader (parser)
+       Object                                               ;; methods declared below Object are associated with the JS Object
        (render [this]
                (let [{:keys [:get/description]} (om/props this)]
                  (dom/div nil
@@ -43,20 +43,20 @@
                                  :value     description
                                  :onChange  (fn [e]
                                               (let [value (.. e -target -value)]
-                                              (om/transact! this
-                                                            `[(edit/description {:description ~value})])))})
+                                                (om/transact! this
+                                                              `[(edit/description {:description ~value})])))})
                           (dom/label nil (str "There are " (.-length description) " characters."))))))
 
 (defmulti reading om/dispatch)
 
 (defmethod reading :get/description
-  [{:keys [state]} key params]
-  {:value (:app/description @state)})
+  [{:keys [state]} key params]                              ;; environment {:state :parser} key params
+  {:value (get @state :app/description)})
 
 (defmulti mutating om/dispatch)
 
 (defmethod mutating 'edit/description
-  [{:keys [state]} _ {:keys [description]}]
+  [{:keys [state]} _ {:keys [description]}]                 ;; :description received
   ;; :value is an optional query expression to help document stale keys that should be re-read after mutation for the client to action
   {:value [:get/description]}
   {:action (fn [] (swap! state assoc :app/description description))})

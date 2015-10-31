@@ -8,11 +8,11 @@ Simple [om-next](https://github.com/omcljs/om/wiki/Quick-Start-%28om.next%29) ex
 
 ## Setup
 
-To get an interactive development environment run:
+Intellij - Cursive - REPL
 
-    lein figwheel
+![Figwheel Idea Cursive](https://raw.githubusercontent.com/griffio/griffio.github.io/master/public/figwheel-idea.png)
 
-and open your browser at [localhost:3449](http://localhost:3449/).
+Open your browser at [localhost:3449](http://localhost:3449/).
 This will auto compile and send all changes to the browser without the
 need to reload. After the compilation process is complete, you will
 get a Browser Connected REPL. An easy way to try it is:
