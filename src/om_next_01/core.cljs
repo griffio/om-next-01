@@ -37,7 +37,7 @@
        (render [this]
                (let [{:keys [:get/description]} (om/props this)]
                  (dom/div nil
-                          (dom/label nil "Description")
+                          (dom/h3 nil description)
                           (dom/input
                             #js {:className "om-description"
                                  :value     description
