@@ -6,6 +6,8 @@ Simple [om-next](https://github.com/omcljs/om/wiki/Quick-Start-%28om.next%29) ex
 
 ## Overview
 
+![om-next-01.gif](https://raw.githubusercontent.com/griffio/griffio.github.io/master/public/om-next-01.gif)
+
 ## Setup
 
 Intellij - Cursive - REPL
