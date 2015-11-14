@@ -2,7 +2,7 @@
 
 Simple [om-next](https://github.com/omcljs/om/wiki/Quick-Start-%28om.next%29) example to render a text input and a label that counts the characters entered. 
   
-[1.0.0-alpha20](https://clojars.org/org.omcljs/om)
+[1.0.0-alpha22](https://clojars.org/org.omcljs/om)
 
 ## Overview
 
