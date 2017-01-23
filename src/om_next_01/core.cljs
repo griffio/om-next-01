@@ -4,10 +4,7 @@
     [goog.dom :as gdom]
     [cognitect.transit :as tt]
     [om.next :as om :refer-macros [defui]]
-    [om.dom :as dom]
-    [clojure.test.check :as ck]
-    [clojure.test.check.generators :as ckgs]
-    [clojure.test.check.properties :as ckps]))
+    [om.dom :as dom]))
 
 (enable-console-print!)
 
@@ -69,8 +66,7 @@
 (om/add-root! app-reconciler
               UIView (gdom/getElement "ui"))
 
-(defn on-js-reload []
+(defn on-js-reload [])
   ;; optionally touch your app-state to force rerendering depending on
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
-  )
